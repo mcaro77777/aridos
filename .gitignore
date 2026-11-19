@@ -1,0 +1,42 @@
+# Secretos y configuración local
+.env
+.env.*
+!.env.example
+
+# Dependencias y salidas temporales de Angular
+web/node_modules/
+web/.angular/
+web/dist/
+web/coverage/
+npm-debug.log*
+
+# Binarios, cobertura y temporales de Go
+/aridos-api
+*.exe
+*.test
+*.out
+/coverage/
+
+# Herramientas y editores
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+
+# Proyectos usados solo como referencia arquitectónica
+/crm-api/
+/crm-web/
+
+# Fuente histórica local; no debe publicarse en Git
+/*.xls
+/*.xlsx
+/*.xlsm
+
+# El esquema versionado vive en documentacion/base_de_datos.sql
+/crear_base_gestion_aridos.sql
+
+# Archivos de ejecución local
+/tmp/
+/data/

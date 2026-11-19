@@ -1,0 +1,32 @@
+{
+  "name": "aridos-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --host 0.0.0.0 --port 4200 --proxy-config proxy.conf.json",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit"
+  },
+  "engines": {
+    "node": ">=20.19.0 <21 || >=22.12.0 <23 || >=24"
+  },
+  "dependencies": {
+    "@angular/common": "22.3.0",
+    "@angular/compiler": "22.3.0",
+    "@angular/core": "22.3.0",
+    "@angular/forms": "22.3.0",
+    "@angular/platform-browser": "22.3.0",
+    "@angular/router": "22.3.0",
+    "rxjs": "7.8.1",
+    "tslib": "2.6.2"
+  },
+  "devDependencies": {
+    "@angular/build": "22.3.0",
+    "@angular/cli": "22.3.0",
+    "@angular/compiler-cli": "22.3.0",
+    "sass": "1.89.2",
+    "typescript": "6.0.3"
+  }
+}

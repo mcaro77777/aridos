@@ -36,7 +36,14 @@ import { IconoComponent } from '../../shared/icono.component';
             <tbody>
               @for (solicitud of solicitudes(); track solicitud.id) {
                 <tr>
-                  <td data-etiqueta="Referencia"><a [routerLink]="['/solicitudes', solicitud.id]">{{ solicitud.codigoReferencia }}</a><small>{{ etiquetaTipo(solicitud.tipoReferencia) }}</small></td>
+                  <td data-etiqueta="Referencia">
+                    <div class="referencia-contenido">
+                      <a class="referencia-enlace" [routerLink]="['/solicitudes', solicitud.id]" [attr.aria-label]="'Abrir detalle de la solicitud ' + solicitud.codigoReferencia">
+                        <span>{{ solicitud.codigoReferencia }}</span><span class="referencia-accion">Ver detalle <b aria-hidden="true">→</b></span>
+                      </a>
+                      <small>{{ etiquetaTipo(solicitud.tipoReferencia) }}</small>
+                    </div>
+                  </td>
                   <td data-etiqueta="Solicitante">{{ solicitud.nombreSolicitante }}</td>
                   <td data-etiqueta="Compra">{{ solicitud.fechaCompra | date:'dd/MM/yyyy' }}</td>
                   <td data-etiqueta="Comprado" class="numero">{{ solicitud.cantidadTotalComprada | number:'1.0-2' }}</td>

@@ -10,6 +10,9 @@ internal/                        lógica de negocio, acceso a datos y HTTP
 web/                             código fuente Angular
 ClientApp/                       Angular compilado servido por Go
 documentacion/base_de_datos.sql  base, tablas, relaciones e índices MySQL
+documentacion/poblar_datos_excel_2026.sql  carga local (no se publica: contiene datos reales)
+documentacion/validar_importacion_excel_2026.sql  controles posteriores a la carga
+scripts/generar_importacion_excel.py  regenerador de los SQL desde el libro
 Dockerfile                       compilación reproducible para Easypanel
 ```
 
@@ -37,6 +40,26 @@ Ejemplo ejecutado desde la consola, si se prefiere:
 
 ```bash
 mysql -h HOST -u USUARIO -p < documentacion/base_de_datos.sql
+```
+
+### Poblar la base con el Excel
+
+Después de crear el esquema, abre y ejecuta como **script SQL completo** los archivos en este orden:
+
+1. `documentacion/poblar_datos_excel_2026.sql` carga catálogos, 330 solicitudes y 166 entregas.
+2. `documentacion/validar_importacion_excel_2026.sql` comprueba conteos, totales, precios históricos y consistencia.
+
+El primer archivo contiene nombres y datos operacionales reales, por lo que está excluido de Git. Se genera y ejecuta localmente; no lo publiques en un repositorio público.
+
+La carga usa una transacción, obtiene un bloqueo exclusivo y conserva una marca con la hoja y fila de origen. Se puede volver a ejecutar sin duplicar datos; si encuentra una solicitud incompatible o una sobreentrega, revierte la operación. Los precios del Excel se guardan como precio aplicado histórico y no reemplazan el precio vigente del catálogo.
+
+No se cargan automáticamente los 198 registros históricos de `Hoja2`: traen fecha de entrega, pero no fecha de compra, que es obligatoria en el modelo. Deben completarse o acordarse antes de migrarlos.
+
+Para regenerar ambos SQL desde una nueva copia del libro:
+
+```powershell
+python -m pip install -r documentacion/requirements-importacion.txt
+python scripts/generar_importacion_excel.py
 ```
 
 ## 2. Configuración
